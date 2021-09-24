@@ -1,0 +1,56 @@
+.resultado {
+  background: white;
+  padding: 10px;
+}
+
+.resultado:nth-child(even) {
+  background: #eee;
+}
+
+.resultados {
+  width: 280px;
+  max-height: 200px;
+  border: 1px solid #dedede;
+  border-radius: 3px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+}
+
+.btn-primary{
+	margin-top: 1rem;
+}
+
+.adicionar-produto{
+	background-color: #eee;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.titulo-principal{
+	text-align:center;
+	margin-top:1rem;
+	margin-bottom:1rem
+}
+
+.rodape{
+	text-align:center;
+	font-size:0.8rem
+}
+
+.tar{
+	text-align: right !important;
+}
+
+.text-align-right{
+	text-align: right;
+}
+
+.text-align-center{
+	text-align: center;
+}
+
+.linha-totalizadora{
+	background-color: #eee;
+    font-weight: 700;
+}

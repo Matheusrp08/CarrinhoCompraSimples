@@ -1,0 +1,172 @@
+package br.com.supera.game.store.controller;
+
+
+import br.com.supera.game.store.exception.CarrinhoException;
+import br.com.supera.game.store.model.Produto;
+import br.com.supera.game.store.rest.Resposta;
+import br.com.supera.game.store.rest.RespostaCarrinho;
+import br.com.supera.game.store.service.ProdutoService;
+import br.com.supera.game.store.util.Constantes;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+@Scope(value="session")
+@Controller
+public class RestCarrinhoController {
+	
+	@Autowired
+	private ProdutoService produtoService;
+	
+	@Autowired
+    private MessageSource messageSource;
+	
+	Logger logger = LoggerFactory.getLogger(RestCarrinhoController.class);
+	
+	private List<Produto> carrinho = new ArrayList<Produto>();
+	
+	@RequestMapping(path= Constantes.Url.URL_CARRINHO, method = RequestMethod.GET)
+	public @ResponseBody
+	RespostaCarrinho consultarTodos() {
+		RespostaCarrinho resposta = new RespostaCarrinho();
+		if (carrinho.isEmpty()) {
+			resposta.setCodigo(Constantes.Status.CODIGO_ERRO);
+			resposta.setMensagem(messageSource.getMessage("carrinho.erro.vazio", null, Locale.getDefault()));
+		}else {
+			resposta.setResposta(carrinho);
+			Double valorTotal = new Double(0);
+			Integer qtdTotal = new Integer(0);
+			for (Produto produto : carrinho) {
+				valorTotal = valorTotal + (produto.getValor() * produto.getQuantidade());
+				qtdTotal = qtdTotal + produto.getQuantidade();
+			}
+			resposta.setValorTotal(valorTotal);
+			resposta.setQtdTotal(qtdTotal);
+		}		
+		logger.info("Consultando todos os produtos no carrinho");
+		return resposta;
+	}
+	
+	@RequestMapping(path=Constantes.Url.URL_CARRINHO + "/{id}", method = RequestMethod.GET)
+	public @ResponseBody
+	Resposta consultarProdutoPorId(@PathVariable Long id) {
+		Resposta resposta = new Resposta();
+		List<Produto> lstProduto = new ArrayList<Produto>();
+		for (Produto produto : carrinho) {
+			if (produto.getId() == id) {
+				lstProduto.add(produto);
+			}
+		}	
+		if(lstProduto.isEmpty()) {
+			resposta.setCodigo(Constantes.Status.CODIGO_ERRO);
+			resposta.setMensagem(String.format(messageSource.getMessage("produto.erro.produto.naoencontrado", null, Locale.getDefault()), id));
+		}else {
+			resposta.setResposta(lstProduto);	
+		}			 
+		logger.info(String.format("Consultando produto %s no carrinho", id));
+		return resposta;
+	}
+	
+	@RequestMapping(path=Constantes.Url.URL_CARRINHO, method = RequestMethod.POST)
+	public @ResponseBody Resposta adicionarProduto(@RequestBody Produto produto) {
+		Resposta resposta = new Resposta();
+		try {
+			Long id = produto .getId();			
+			if (id == null || id == 0) {
+				resposta.setCodigo(Constantes.Status.CODIGO_ERRO);
+				resposta.setMensagem(String.format(messageSource.getMessage("campo.obrigatorio", null, Locale.getDefault()), 
+						messageSource.getMessage("campo.id", null, Locale.getDefault())));
+			}else {
+				Produto produtoJaAdicionado = null;
+				for (Produto p : carrinho) {
+					if (p.getId() == id) {
+						produtoJaAdicionado = p;
+						break;
+					}
+				}
+				if (produtoJaAdicionado == null) {
+					Produto produtoSalvo = produtoService.buscarProdutoPorId(id);
+					produtoSalvo.setQuantidade(1);
+					carrinho.add(produtoSalvo);
+					resposta.setResposta(carrinho);
+				}else {
+					resposta.setCodigo(Constantes.Status.CODIGO_ERRO);
+					resposta.setMensagem(messageSource.getMessage("carrinho.erro.produto.ja.adicionado", null, Locale.getDefault()));
+				}								 
+			}			
+			logger.info(String.format("Adicionando produto %s no carrinho", produto.getId()));
+		}catch(CarrinhoException e) {
+			resposta.setCodigo(Constantes.Status.CODIGO_ERRO);
+			resposta.setMensagem(e.getMensagem());
+		}
+		return resposta;
+	}
+	
+	@RequestMapping(path=Constantes.Url.URL_CARRINHO + "/{id}", method = RequestMethod.PUT)
+	public @ResponseBody Resposta atualizarQuantidadeProduto(@RequestBody Produto produto, @PathVariable Long id) {
+		Resposta resposta = new Resposta();		
+		Produto produtoInformado = null;
+		for (Produto p : carrinho) {
+			if (p.getId() == id) {
+				produtoInformado = p;
+				break;
+			}
+		}
+		if (produtoInformado == null) {
+			resposta.setCodigo(Constantes.Status.CODIGO_ERRO);
+			resposta.setMensagem(messageSource.getMessage("carrinho.erro.produto.nao.encontrado.para.atualizacao", null, Locale.getDefault()));
+		}else {
+			Integer novaQtd = produto.getQuantidade();
+			if (novaQtd == 0) {
+				carrinho.remove(produtoInformado);
+			}else {
+				produtoInformado.setQuantidade(novaQtd);
+			}
+		}
+		logger.info(String.format("Atualizando a quantidade do produto %s no carrinho", id));		
+		return resposta;
+	}
+	
+	@RequestMapping(path=Constantes.Url.URL_CARRINHO + "/{id}", method = RequestMethod.DELETE)
+	public @ResponseBody Resposta removerProdutoCarrinho(@PathVariable Long id) {
+		Resposta resposta = new Resposta();	
+		Produto produtoSelecionado = null;
+		if (id == null || id == 0) {
+			resposta.setCodigo(Constantes.Status.CODIGO_ERRO);
+			resposta.setMensagem(String.format(messageSource.getMessage("campo.obrigatorio", null, Locale.getDefault()), 
+					messageSource.getMessage("campo.id", null, Locale.getDefault())));
+		}else {
+			for (Produto p : carrinho) {
+				if (p.getId() == id) {
+					produtoSelecionado = p;
+					break;
+				}
+			}
+			if (produtoSelecionado == null) {
+				resposta.setCodigo(Constantes.Status.CODIGO_ERRO);
+				resposta.setMensagem(messageSource.getMessage("carrinho.erro.produto.nao.encontrado", null, Locale.getDefault()));
+			}else {
+				carrinho.remove(produtoSelecionado);
+			}
+		}
+		logger.info(String.format("Removendo produto %s", id));
+		return resposta;
+	}
+	
+	@RequestMapping(path=Constantes.Url.URL_LIMPAR_CARRINHO, method = RequestMethod.GET)
+	public @ResponseBody Resposta limparCarrinho() {
+		Resposta resposta = new Resposta();
+		carrinho.clear();
+		logger.info("Carrinho limpado!");
+		return resposta;
+	}
+
+}
