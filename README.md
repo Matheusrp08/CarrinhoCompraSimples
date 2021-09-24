@@ -5,20 +5,20 @@ Senha: matheus
 
 Frameworks utilizados
  
- Spring Boot
- Spring MVC
- Spring Data
- Spring Security
- Spring Test
- MySQL DB
- Angular
- Thymeleaf
- JQuery
- CSS
- Bootstrap
- HTML 5
- Maven
- GIT
+ Spring Boot, 
+ Spring MVC,
+ Spring Data, 
+ Spring Security, 
+ Spring Test, 
+ MySQL DB, 
+ Angular, 
+ Thymeleaf, 
+ JQuery, 
+ CSS, 
+ Bootstrap, 
+ HTML 5, 
+ Maven, 
+ GIT, 
 
 Roteiro básico de instalação
 
