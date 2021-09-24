@@ -79,13 +79,17 @@
 				                	type="number" 
 				                	ng-model="produto.quantidade"
 				                	ng-blur="carrinhoController.atualizarProduto(produto)">
+
 				            </td>
 			                <td class="text-align-right">{{produto.valor}}</td>
-			                <td class="text-align-right" ng-init="subtotal = produto.quantidade * produto.valor">{{subtotal}}</td>
+							<td class="text-align-right" ng-init="frete =  10.00 * produto.quantidade ">{{frete}}</td>
+			                <td class="text-align-right" ng-init="subtotal = 10.00 * produto.quantidade + produto.valor * produto.quantidade">{{subtotal}}</td>
 			                <td class="text-align-right">
 			                	<button type="button" ng-click="carrinhoController.removerProduto(produto)" class="btn btn-secondary">Remover</button>
 			                </td>			                
 			            </tr>
+
+
 			            <tr class="linha-totalizadora" ng-show="carrinhoController.carrinho.length > 0">
 			                <td class="text-align-center" th:text="#{campo.total}"></td>
 			                <td></td>

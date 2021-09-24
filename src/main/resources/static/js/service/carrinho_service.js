@@ -80,7 +80,8 @@ angular.module('carrinhoApp').factory('CarrinhoService', ['$http', '$q', functio
         return deferred.promise;
     	
     }
-    
+
+
     function limparCarrinho(){    
     	var deferred = $q.defer();
         $http.get(REST_SERVICE_URI_LIMPAR_CARRINHO)

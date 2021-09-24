@@ -27,7 +27,6 @@ App.controller('CarrinhoController', ['$scope', 'CarrinhoService', 'ProdutoServi
     	};
 
     	self.qtdTotal = 0;
-    	self.valorFrete = 10.00;
     	self.valorTotal = 0;
     	self.focus = false;    	
         self.busca = '';        
@@ -49,7 +48,6 @@ App.controller('CarrinhoController', ['$scope', 'CarrinhoService', 'ProdutoServi
             	if (d.codigo == 0){
             		self.carrinho = d.resposta;
             		self.valorTotal = d.valorTotal;
-            		self.valorFrete = d.valorFrete;
             		self.qtdTotal = d.qtdTotal;           		
             	}else{
             		self.msgCarrinho = d.mensagem;
@@ -160,6 +158,7 @@ App.controller('CarrinhoController', ['$scope', 'CarrinhoService', 'ProdutoServi
         	self.msgErro = "Quantidade inválida";
         }
     }
+
     
     function limparCarrinho(){    	
     	CarrinhoService.limparCarrinho()

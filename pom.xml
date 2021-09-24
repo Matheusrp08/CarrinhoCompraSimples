@@ -147,7 +147,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <mainClass>br.com.supera.game.store.application.properties</mainClass>
                 <configuration>
                     <profiles>
                         <profile>dev</profile>
