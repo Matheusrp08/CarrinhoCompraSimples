@@ -1,3 +1,51 @@
+Gestão do carrinho através da interface web:
+URL: http://< HOST >:9090/
+Usuário: user
+Senha: matheus
+
+Frameworks utilizados
+ 
+ Spring Boot, 
+ Spring MVC,
+ Spring Data, 
+ Spring Security, 
+ Spring Test, 
+ MySQL DB, 
+ Angular, 
+ Thymeleaf, 
+ JQuery, 
+ CSS, 
+ Bootstrap, 
+ HTML 5, 
+ Maven, 
+ GIT, 
+
+Roteiro básico de instalação
+
+Criar o schema "superatestematheus" na base de dados;
+
+Definir um usuário com acesso de escrita e consulta ao novo schema;
+
+Baixar código fonte:
+
+git clone git@github.com:Matheusrp08/testesupera.git
+
+Executar o script SQL que se encontra no diretório "sql";
+
+Editar o arquivo "pom.xml" atualizando as configurações da base de dados e log do profile "dev";
+
+Executar o seguinte comando onde se encontra o arquivo pom.xml:
+
+mvn clean install
+
+Executar o seguinte comando para inicializar a aplicação:
+
+
+
+
+
+
+
 # Avaliação Java
 
 
