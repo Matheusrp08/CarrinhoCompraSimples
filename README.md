@@ -30,8 +30,6 @@ Baixar código fonte:
 
 git clone git@github.com:Matheusrp08/testesupera.git
 
-Executar o script SQL que se encontra no diretório "sql";
-
 Editar o arquivo "pom.xml" atualizando as configurações da base de dados e log do profile "dev";
 
 Executar o seguinte comando onde se encontra o arquivo pom.xml:
