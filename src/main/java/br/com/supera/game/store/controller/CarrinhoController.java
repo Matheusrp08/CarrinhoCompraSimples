@@ -8,7 +8,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -32,6 +34,18 @@ public class CarrinhoController {
         return "carrinho";
     }
 
+    @RequestMapping(value="/salvarprodutos", method=RequestMethod.GET)
+    public String form() {
+        return "produtos";
+    }
+
+    @RequestMapping(value="/salvarprodutos", method=RequestMethod.POST)
+    public String Enviarprodutos(Produto produto) {
+        produtoRepository.save(produto);
+        return "redirect:/produtos";
+    }
+
+
     @RequestMapping("/produtos")
     public ModelAndView listaProdutos() {
         ModelAndView mv = new ModelAndView("carrinho");
@@ -39,6 +53,7 @@ public class CarrinhoController {
         mv.addObject("produtos", produtos);
         return mv;
     }
+
 
     @Bean
     private ViewResolver viewResolver() {

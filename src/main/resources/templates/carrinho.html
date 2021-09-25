@@ -148,6 +148,7 @@
 
         <div id="produtos">
 
+            <form action="salvarproduto" th:object="${produto}" method="post">
             <table class="table table-bordered">
                 <div th:each="produto : ${produtos}">
                     <thead>
@@ -167,10 +168,10 @@
                                 th:text="#{botao.adicionar}"></button>
                     </td>
                     </td>
-
                     </tbody>
                 </div>
             </table>
+            </form>
         </div>
     </div>
 
