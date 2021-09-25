@@ -11,7 +11,7 @@ Frameworks utilizados
  Spring Security, 
  Spring Test, 
  MySQL DB, 
- Angular, 
+ Angular,um pouco de JavaScript,  
  Thymeleaf, 
  JQuery, 
  CSS, 
