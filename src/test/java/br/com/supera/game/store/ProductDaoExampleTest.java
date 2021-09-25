@@ -19,25 +19,25 @@ import static org.junit.Assert.*;
 public class ProductDaoExampleTest {
 
     @Rule
-    public EntityManagerProvider emProvider = EntityManagerProvider.instance("productDS");  
+    public EntityManagerProvider emProvider = EntityManagerProvider.instance("productDS");
 
     @Rule
-	public DBUnitRule dbUnitRule = DBUnitRule.instance(emProvider.connection()); 
-	
-	@Test
-	@DBUnit(allowEmptyFields = true)
-    @DataSet("products.yml") 
+    public DBUnitRule dbUnitRule = DBUnitRule.instance(emProvider.connection());
+
+    @Test
+    @DBUnit(allowEmptyFields = true)
+    @DataSet("products.yml")
     public void shouldListProducts() {
-		try {
-			List<Product> products = em().
-					createQuery("select p from Product p").
-					getResultList();
-			assertNotNull(products);
-			assertEquals(9, products.size());
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail(e.getMessage());
-		}
-        
+        try {
+            List<Product> products = em().
+                    createQuery("select p from Product p").
+                    getResultList();
+            assertNotNull(products);
+            assertEquals(9, products.size());
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail(e.getMessage());
+        }
+
     }
 }

@@ -1,5 +1,5 @@
-product: 
-  - id: 312 
+product:
+  - id: 312
     name: "@realpestano"
     name: "Super Mario Odyssey"
     price: 197.88
@@ -15,7 +15,7 @@ product:
     price: 119.5
     score: 250
     image: "the-witcher-iii-wild-hunt.png"
-  - id:  99
+  - id: 99
     name: "Call Of Duty WWII"
     price: 249.99
     score: 205

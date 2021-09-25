@@ -10,75 +10,75 @@ import java.util.Date;
 @Entity
 @Table(name = "produto")
 public class Produto {
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "id", nullable = false)
-	private Long id;
-	
-	@Column(name = "nome", nullable = false)
-	private String nome;
-	
-	@Column(name = "valor", nullable = false, precision=13, scale=2)
-	private Double valor;
-	
-	@Transient
-	@JsonInclude(Include.NON_NULL)
-	private Integer quantidade;
-	
-	@JsonIgnore
-	@Column(name = "data_criacao", nullable = false)
-	private Date dataCriacao;
-	
-	@JsonIgnore
-	@Column(name = "data_exclusao")
-	private Date dataExclusao;
 
-	public Long getId() {
-		return id;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Long id;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @Column(name = "nome", nullable = false)
+    private String nome;
 
-	public String getNome() {
-		return nome;
-	}
+    @Column(name = "valor", nullable = false, precision = 13, scale = 2)
+    private Double valor;
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    @Transient
+    @JsonInclude(Include.NON_NULL)
+    private Integer quantidade;
 
-	public Double getValor() {
-		return valor;
-	}
+    @JsonIgnore
+    @Column(name = "data_criacao", nullable = false)
+    private Date dataCriacao;
 
-	public void setValor(Double valor) {
-		this.valor = valor;
-	}
+    @JsonIgnore
+    @Column(name = "data_exclusao")
+    private Date dataExclusao;
 
-	public Integer getQuantidade() {
-		return quantidade;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setQuantidade(Integer quantidade) {
-		this.quantidade = quantidade;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public Date getDataCriacao() {
-		return dataCriacao;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public void setDataCriacao(Date dataCriacao) {
-		this.dataCriacao = dataCriacao;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public Date getDataExclusao() {
-		return dataExclusao;
-	}
+    public Double getValor() {
+        return valor;
+    }
 
-	public void setDataExclusao(Date dataExclusao) {
-		this.dataExclusao = dataExclusao;
-	}
+    public void setValor(Double valor) {
+        this.valor = valor;
+    }
+
+    public Integer getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public Date getDataCriacao() {
+        return dataCriacao;
+    }
+
+    public void setDataCriacao(Date dataCriacao) {
+        this.dataCriacao = dataCriacao;
+    }
+
+    public Date getDataExclusao() {
+        return dataExclusao;
+    }
+
+    public void setDataExclusao(Date dataExclusao) {
+        this.dataExclusao = dataExclusao;
+    }
 }

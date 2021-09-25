@@ -1,35 +1,35 @@
 package br.com.supera.game.store.exception;
 
-public class CarrinhoException extends Exception{
+public class CarrinhoException extends Exception {
 
-	private static final long serialVersionUID = 4638156197467247223L;
-		
-	private String mensagem;
-	private Exception exception;
-	
-	public CarrinhoException(String mensagem, Exception exception) {
-		this.mensagem = mensagem;
-		if (exception == null) {
-			this.exception = new Exception();
-		}else {
-			this.exception = exception;	
-		}		
-	}
+    private static final long serialVersionUID = 4638156197467247223L;
 
-	public String getMensagem() {
-		return mensagem;
-	}
+    private String mensagem;
+    private Exception exception;
 
-	public void setMensagem(String mensagem) {
-		this.mensagem = mensagem;
-	}
+    public CarrinhoException(String mensagem, Exception exception) {
+        this.mensagem = mensagem;
+        if (exception == null) {
+            this.exception = new Exception();
+        } else {
+            this.exception = exception;
+        }
+    }
 
-	public Exception getException() {
-		return exception;
-	}
+    public String getMensagem() {
+        return mensagem;
+    }
 
-	public void setException(Exception exception) {
-		this.exception = exception;
-	}
-	
+    public void setMensagem(String mensagem) {
+        this.mensagem = mensagem;
+    }
+
+    public Exception getException() {
+        return exception;
+    }
+
+    public void setException(Exception exception) {
+        this.exception = exception;
+    }
+
 }
