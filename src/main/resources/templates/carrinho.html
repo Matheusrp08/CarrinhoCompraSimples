@@ -59,11 +59,11 @@
 
 
     <select id="select" name="select">
-        <option value=" ">Selecione</option>
+        <option value=" ">Selecione (Digite)</option>
 
-        <option value="carrinho">Meu Carrinho</option>
+        <option value="carrinho">http://localhost:9090/</option>
 
-        <option value="produtos">Lista de Jogos</option>
+        <option value="produtos">http://localhost:9090/produtos</option>
 
     </select>
 
@@ -159,7 +159,6 @@
                     </tr>
                     </thead>
                     <tbody>
-
                     <td class="text-align-center"><p><span th:text="${produto.id}"></span></p>
                     <td class="text-align-center"><p><span th:text="${produto.nome}"></span></p>
                     <td class="text-align-center"><p><span th:text="${produto.valor}"></span></p>

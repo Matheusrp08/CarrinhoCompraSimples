@@ -9,12 +9,8 @@ import br.com.supera.game.store.util.Constantes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Controller
 public class RestProdutoController {
@@ -102,20 +98,5 @@ public class RestProdutoController {
         }
         return resposta;
     }
-    @RequestMapping("/produtos")
-    public ModelAndView listaProdutos() {
 
-        ModelAndView mv = new ModelAndView("produto");
-        Iterable<Produto> resultados = produtoRepository.findAll();
-        mv.addObject("produtos", resultados);
-        return mv;
-    }
-
-    @Bean
-    private ViewResolver viewResolver() {
-        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-        viewResolver.setPrefix("classpath:templates/");
-        viewResolver.setSuffix(".html");
-        return viewResolver;
-    }
 }
