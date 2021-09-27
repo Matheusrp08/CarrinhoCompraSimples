@@ -19,6 +19,7 @@ public class Produto {
     @Column(name = "nome", nullable = false)
     private String nome;
 
+
     @Column(name = "valor", nullable = false, precision = 13, scale = 2)
     private Double valor;
 
@@ -33,6 +34,18 @@ public class Produto {
     @JsonIgnore
     @Column(name = "data_exclusao")
     private Date dataExclusao;
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    @JsonIgnore
+    @Column(name = "descricao")
+    private String descricao;
 
     public Long getId() {
         return id;

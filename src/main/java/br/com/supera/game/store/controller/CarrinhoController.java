@@ -33,17 +33,6 @@ public class CarrinhoController {
         return "carrinho";
     }
 
-    @RequestMapping(value = "/salvarprodutos", method = RequestMethod.GET)
-    public String form() {
-        return "produtos";
-    }
-
-    @RequestMapping(value = "/salvarprodutos", method = RequestMethod.POST)
-    public String Enviarprodutos(Produto produto) {
-        produtoRepository.save(produto);
-        return "redirect:/produtos";
-    }
-
 
     @RequestMapping("/listajogos")
     public ModelAndView listaProdutos() {
