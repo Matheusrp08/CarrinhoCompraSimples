@@ -9,14 +9,18 @@ $('#select').on('change', function(){
 
 });
 
-var tds = document.querySelectorAll('table td[data-estado]');
-document.querySelector('.btn-group').addEventListener('click', function(e) {
-  var estado = e.target.id;
-  for (var i = 0; i < tds.length; i++) {
-    var tr = tds[i].closest('tr');
-    tr.style.display = estado == tds[i].dataset.estado || !estado ? '' : 'none';
-  }
-});
+
+$(document).ready(function() {
+    $('#tabelaproduto').DataTable( {
+"language": {
+            "lengthMenu": "Mostrando _MENU_ jogos por página",
+            "zeroRecords": "Nada encontrado",
+            "info": "Mostrando página _PAGE_ de _PAGES_",
+            "infoEmpty": "Nenhum registro disponível",
+            "infoFiltered": "(filtrando de _MAX_ registros no total)"
+        }
+    } );
+} );
 
 });
 

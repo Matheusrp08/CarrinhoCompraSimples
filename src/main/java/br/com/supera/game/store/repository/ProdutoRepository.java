@@ -17,4 +17,5 @@ public interface ProdutoRepository extends CrudRepository<Produto, Long> {
     @Query("SELECT p FROM Produto p WHERE p.dataExclusao IS NULL")
     List<Produto> buscarTodosProdutos();
 
+
 }
