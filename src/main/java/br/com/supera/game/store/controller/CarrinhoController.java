@@ -45,11 +45,11 @@ public class CarrinhoController {
     }
 
 
-    @RequestMapping("/produtos")
+    @RequestMapping("/listajogos")
     public ModelAndView listaProdutos() {
         ModelAndView mv = new ModelAndView("carrinho");
         Iterable<Produto> produtos = produtoRepository.findAll();
-        mv.addObject("produtos", produtos);
+        mv.addObject("listajogos", produtos);
         return mv;
     }
 
@@ -60,6 +60,17 @@ public class CarrinhoController {
         viewResolver.setPrefix("classpath:templates/");
         viewResolver.setSuffix(".html");
         return viewResolver;
+    }
+
+
+    @GetMapping("/listajogos")
+    public ModelAndView newJedi() {
+
+
+        ModelAndView mv = new ModelAndView("listajogos");
+        Iterable<Produto> produtos = produtoRepository.findAll();
+        mv.addObject("listajogos", produtos);
+        return mv;
     }
 
 

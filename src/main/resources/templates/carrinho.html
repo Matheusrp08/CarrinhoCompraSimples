@@ -31,166 +31,114 @@
 			</span>
     </div>
 
+    <a href="#" th:href="@{/listajogos}">Lista de Jogos</a>
 
-    <select id="select" name="select">
-        <option value=" ">Selecione (Digite)</option>
-
-        <option value="carrinho">http://localhost:9090/</option>
-
-        <option value="produtos">http://localhost:9090/produtos</option>
-
-    </select>
-
-
-    <div id="pai">
-
-
-        <div id="carrinho">
-
-            <div class="row adicionar-produto">
-                <div class="col">
-                    <div class="form-group">
-                        <h6 th:text="#{titulo.busca.produto}"></h6>
-                        <input
-                                type="text"
-                                class="form-control"
-                                id="produto"
-                                autocomplete="off"
-                                th:placeholder="#{placeholder.busca.produto}"
-                                ng-focus="carrinhoController.focus=true"
-                                ng-keyup="carrinhoController.filtrar()"
-                                ng-model="carrinhoController.busca">
-                        <div class="resultados" ng-show="carrinhoController.focus">
-                            <div
-                                    class="resultado"
-                                    ng-repeat="item in carrinhoController.produtosFiltrados"
-                                    ng-click="carrinhoController.focus = false; carrinhoController.setProduto(item)">
-                                {{item.nome}} - R$ {{item.valor}}
-                            </div>
-                        </div>
-                        <button ng-click="carrinhoController.adicionarProduto()" class="btn btn-primary mb-2"
-                                th:text="#{botao.adicionar}"></button>
+    <div class="row adicionar-produto">
+        <div class="col">
+            <div class="form-group">
+                <h6 th:text="#{titulo.busca.produto}"></h6>
+                <input
+                        type="text"
+                        class="form-control"
+                        id="produto"
+                        autocomplete="off"
+                        th:placeholder="#{placeholder.busca.produto}"
+                        ng-focus="carrinhoController.focus=true"
+                        ng-keyup="carrinhoController.filtrar()"
+                        ng-model="carrinhoController.busca">
+                <div class="resultados" ng-show="carrinhoController.focus">
+                    <div
+                            class="resultado"
+                            ng-repeat="item in carrinhoController.produtosFiltrados"
+                            ng-click="carrinhoController.focus = false; carrinhoController.setProduto(item)">
+                        {{item.nome}} - R$ {{item.valor}}
                     </div>
                 </div>
+                <button ng-click="carrinhoController.adicionarProduto()" class="btn btn-primary mb-2"
+                        th:text="#{botao.adicionar}"></button>
             </div>
-
-
-            <div class="row">
-                <div class="col">
-                    <h6 th:text="#{titulo.carrinho}"></h6>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th class="text-align-center" th:text="#{campo.id}"></th>
-                            <th class="text-align-center" th:text="#{campo.nome}"></th>
-                            <th class="text-align-center" th:text="#{campo.quantidade}"></th>
-                            <th class="text-align-center" th:text="#{campo.valor}"></th>
-                            <th class="text-align-center" th:text="#{campo.frete}"></th>
-                            <th class="text-align-center" th:text="#{campo.subtotal}"></th>
-                            <th class="text-align-center" th:text="#{botao.remover}"></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr ng-repeat="produto in carrinhoController.carrinho">
-                            <td class="text-align-center">{{produto.id}}</td>
-                            <td class="text-align-center">{{produto.nome}}</td>
-                            <td class="text-align-center">
-                                <input
-                                        class="text-align-center"
-                                        type="number"
-                                        ng-model="produto.quantidade"
-                                        ng-blur="carrinhoController.atualizarProduto(produto)">
-
-                            </td>
-                            <td class="text-align-right">{{produto.valor}}</td>
-                            <td class="text-align-right" ng-init="frete =  10.00 * produto.quantidade ">{{frete}}</td>
-                            <td class="text-align-right"
-                                ng-init="subtotal = 10.00 * produto.quantidade + produto.valor * produto.quantidade">
-                                {{subtotal}}
-                            </td>
-                            <td class="text-align-right">
-                                <button type="button" ng-click="carrinhoController.removerProduto(produto)"
-                                        class="btn btn-secondary">Remover
-                                </button>
-                            </td>
-                        </tr>
-
-
-                        <tr class="linha-totalizadora" ng-show="carrinhoController.carrinho.length > 0">
-                            <td class="text-align-center" th:text="#{campo.total}"></td>
-                            <td></td>
-                            <td class="text-align-center">{{carrinhoController.qtdTotal}}</td>
-                            <td></td>
-                            <td class="text-align-right">{{carrinhoController.valorTotal}}</td>
-                            <td></td>
-                        </tr>
-                        </tbody>
-                    </table>
-
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert"
-                         ng-show="carrinhoController.msgCarrinho != ''">
-                        <span ng-bind="carrinhoController.msgCarrinho"></span>
-                        <span class="close" aria-label="Close" ng-click="carrinhoController.msgCarrinho = ''">
-				    <span aria-hidden="true">&times;</span>
-				  </span>
-                    </div>
-                </div>
-            </div>
-            <div class="row" ng-show="carrinhoController.carrinho.length > 0">
-                <div class="col tar">
-                    <button ng-click="carrinhoController.limparCarrinho()" class="btn btn-primary mb-2"
-                            th:text="#{botao.limpar}"></button>
-                </div>
-            </div>
-        </div>
-
-
-        <div id="produtos">
-
-
-            <form action="salvarproduto" th:object="${produto}" method="post">
-                <table class="table table-bordered table-hover" id="tabelaproduto" border="1">
-
-                    <thead>
-                    <tr>
-                        <th class="text-align-center" th:text="#{campo.id}"></th>
-                        <th class="text-align-center" th:text="#{campo.nome}"></th>
-                        <th class="text-align-center" th:text="#{campo.valor}"></th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <div th:each="produto : ${produtos}">
-                        <tr>
-
-                            <td class="text-align-center"><p><span th:text="${produto.id}"></span></p>
-                            <td class="text-align-center"><p><span th:text="${produto.nome}"></span></p>
-                            <td class="text-align-center"><p><span th:text="${produto.valor}"></span></p>
-                            <td class="text-align-right">
-                                <button ng-click="carrinhoController.adicionarProduto()"
-                                        class="btn btn-primary mb-2"
-                                        th:text="#{botao.adicionar}"></button>
-
-                            </td>
-
-                        </tr>
-                    </div>
-                    </tbody>
-
-                </table>
-            </form>
         </div>
     </div>
+
 
     <div class="row">
-        <div class="col rodape">
-            <p th:text="#{texto.rodape}"></p>
+        <div class="col">
+            <h6 th:text="#{titulo.carrinho}"></h6>
         </div>
     </div>
+    <div class="row">
+        <div class="col">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th class="text-align-center" th:text="#{campo.id}"></th>
+                    <th class="text-align-center" th:text="#{campo.nome}"></th>
+                    <th class="text-align-center" th:text="#{campo.quantidade}"></th>
+                    <th class="text-align-center" th:text="#{campo.valor}"></th>
+                    <th class="text-align-center" th:text="#{campo.frete}"></th>
+                    <th class="text-align-center" th:text="#{campo.subtotal}"></th>
+                    <th class="text-align-center" th:text="#{botao.remover}"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="produto in carrinhoController.carrinho">
+                    <td class="text-align-center">{{produto.id}}</td>
+                    <td class="text-align-center">{{produto.nome}}</td>
+                    <td class="text-align-center">
+                        <input
+                                class="text-align-center"
+                                type="number"
+                                ng-model="produto.quantidade"
+                                ng-blur="carrinhoController.atualizarProduto(produto)">
+
+                    </td>
+                    <td class="text-align-right">{{produto.valor}}</td>
+                    <td class="text-align-right" ng-init="frete =  10.00 * produto.quantidade ">{{frete}}</td>
+                    <td class="text-align-right"
+                        ng-init="subtotal = 10.00 * produto.quantidade + produto.valor * produto.quantidade">
+                        {{subtotal}}
+                    </td>
+                    <td class="text-align-right">
+                        <button type="button" ng-click="carrinhoController.removerProduto(produto)"
+                                class="btn btn-secondary">Remover
+                        </button>
+                    </td>
+                </tr>
+
+
+                <tr class="linha-totalizadora" ng-show="carrinhoController.carrinho.length > 0">
+                    <td class="text-align-center" th:text="#{campo.total}"></td>
+                    <td></td>
+                    <td class="text-align-center">{{carrinhoController.qtdTotal}}</td>
+                    <td></td>
+                    <td class="text-align-right">{{carrinhoController.valorTotal}}</td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div class="alert alert-warning alert-dismissible fade show" role="alert"
+                 ng-show="carrinhoController.msgCarrinho != ''">
+                <span ng-bind="carrinhoController.msgCarrinho"></span>
+                <span class="close" aria-label="Close" ng-click="carrinhoController.msgCarrinho = ''">
+				    <span aria-hidden="true">&times;</span>
+				  </span>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-show="carrinhoController.carrinho.length > 0">
+        <div class="col tar">
+            <button ng-click="carrinhoController.limparCarrinho()" class="btn btn-primary mb-2"
+                    th:text="#{botao.limpar}"></button>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col rodape">
+        <p th:text="#{texto.rodape}"></p>
+    </div>
+</div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -218,6 +166,7 @@
         var serverPort = /*[[${serverPort}]]*/;
 
        /*]]>*/
+
 
 
 
