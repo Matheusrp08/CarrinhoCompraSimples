@@ -1,3 +1,14 @@
+Quando se fala que os valores no checkout deveriam ser calculados dinamicamente eu pensei em uma tecnologia
+Que nunca tinha trabalhado, o angular JS para fazer está parte do teste
+Usei o spring para fazer todo o processo interno até enviar os dados do banco para o html
+E usei um pouco de JavaScript para algumas funcionalidades da tabela, a parte de listar os produtos ainda tem 
+Alguns detalhes que vou estar corrigindo e colocando aqui, porém dentro do limite de tempo, gosto de trabalhar 
+Com o que já sei porém gosto muito de pegar alguma tecnologia que eu não saiba tanto, porque isso me motiva a 
+Trabalhar com ela, espero que vocês gostem do que estou desenvolvendo, estou dando o meu melhor e aprendendo 
+Com esse teste, afinal supera teste Matheus é o nome do banco de dados no MySql! Até breve, obrigado pela 
+Oportunidade!
+
+
 Gestão do carrinho através da interface web:
 URL: http://< HOST >:9090/ Usuário: user Senha: matheus
 
