@@ -6,6 +6,11 @@ Frameworks utilizados
 Spring Boot, Spring MVC, Spring Data, Spring Security, Spring Test, MySQL DB, Angular, Thymeleaf, JQuery, CSS,
 Bootstrap, HTML 5, Maven, GIT,
 
+Usuário: user
+
+Senha: secret123
+
+
 Roteiro básico de instalação
 
 Criar o schema "superatestematheus" na base de dados;
